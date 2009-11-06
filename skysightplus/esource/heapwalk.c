@@ -225,10 +225,12 @@ static HANDLE g_hHeap;
 static mspace gspace;
 #endif
 
-static char heapbuf[99];
-
 void heapwalk(void)
 {
+	char heapbuf[99];
+	char	szTitle[64];
+    int		nResult;
+    UINT    fuStyle = 0;
 #ifdef WINHEAP_ALLOCATOR
 entry.lpData = NULL;
 nBlocks = nFreeBlocks = 0;
@@ -249,7 +251,10 @@ sprintf(heapbuf, "Blocks %d, Free Blocks %d, used %d\n", nBlocks, nFreeBlocks, n
 HeapDestroy(g_hHeap);
 g_hHeap = NULL;
 #else
-sprintf(heapbuf, "Peak used %d\n", mspace_max_footprint(gspace));
+sprintf(heapbuf, "Peak Memory Used for Object Detection %d bytes\n", mspace_max_footprint(gspace));
+  fuStyle = MB_ICONINFORMATION|MB_OK;
+  GetWindowText ( GetActiveWindow(), szTitle, 63 );
+  nResult = MessageBox ( GetActiveWindow(), heapbuf, szTitle, fuStyle );
 destroy_mspace(gspace);
 gspace = NULL;
 #endif

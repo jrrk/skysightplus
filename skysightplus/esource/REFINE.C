@@ -219,6 +219,9 @@ void	freeparcelout(void)
   QFREE(son);
   QFREE(ok);
   QFREE(objlist);
+  son = NULL;
+  ok = NULL;
+  objlist = NULL;
   return;
   }
 
