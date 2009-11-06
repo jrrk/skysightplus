@@ -1,0 +1,49 @@
+#include "GUILib.rc"
+
+256 MENU 
+{
+ POPUP "&Graffiti"
+ {
+  MENUITEM "&Line\tCtrl+L", 25701
+  MENUITEM "&Rectangle\tCtrl+R", 25702
+  MENUITEM "&Ellipse\tCtrl+E", 25703
+  MENUITEM "R&andom Shape\tCtrl+S", 25704
+  MENUITEM SEPARATOR
+  POPUP "&Color"
+  {
+   MENUITEM "Blac&k", 601
+   MENUITEM "&White", 602
+   MENUITEM "&Red", 603
+   MENUITEM "&Yellow", 604
+   MENUITEM "&Green", 605
+   MENUITEM "&Cyan", 606
+   MENUITEM "&Blue", 607
+   MENUITEM "&Magenta", 608
+   MENUITEM "R&andom", 609
+  }
+
+  POPUP "&Size"
+  {
+   MENUITEM "1 pt", 701
+   MENUITEM "2 pt", 702
+   MENUITEM "4 pt", 703
+   MENUITEM "6 pt", 704
+   MENUITEM "8 pt", 705
+   MENUITEM "10 pt", 706
+  }
+
+  MENUITEM "&Filled Shapes\tCtrl+F", 25708
+  MENUITEM SEPARATOR
+  MENUITEM "E&xit", 25710
+ }
+
+}
+
+256 ACCELERATORS 
+{
+ "^L", 25701, ASCII
+ "^R", 25702, ASCII
+ "^E", 25703, ASCII
+ "^S", 25704, ASCII
+ "^F", 25708, ASCII
+}

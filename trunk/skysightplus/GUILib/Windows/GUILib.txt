@@ -1,0 +1,116 @@
+/**************************  THE GUILib PHILOSOPHY  **************************
+
+	GUILib is a set of source code libraries for developing applications on
+	the two leading Graphical User Interface systems for personal computers:
+	the Macintosh and Microsoft Windows.
+
+	The GUI of both the Mac and Windows share a number of common features,
+	but also have some significant differences.  For instance, both use
+	windows and menus, but on the Macintosh the menus are accessible
+	from the top of the screen, while in Windows the menu bar is displayed
+	inside an application's window.  More fundamentally, a Mac program is
+	usually structured to let the application interact with the operating
+	system by making calls to the system software; in Windows, it's more
+	accurate to say that the opposite is true.  GUILib attempts to bridge
+	gaps like these with a minimum of fuss for the application developer,
+	so that the vast majority of application-specific code can be identical
+	on both platforms.
+
+	However, in some cases there are features which simply have no equivalent
+	in one or the other platform.  There are several ways of dealing with this
+	problem:
+
+	In some cases, I have made GUILib emulate a feature which is native to one
+	OS but not to another.  A window menu, from which the user can select and
+	window by choosing the appropriate menu item, is a good example: it's a
+	native feature of the Microsoft Windows MDI, but not part of the Mac
+	toolbox.  I chose to emulate this feature in the Mac version of GUILib
+	because it was easy to do, and adds useful functionality for the user
+	and little or no extra cost to the application programmer.
+
+	In other cases, a feature may be appropriate to one OS but not to another.
+	For instance, displaying the menu bar inside the application's window is
+	required in Windows but extremely difficult on the Mac; worse, doing so
+	would grossly violate Mac users' expectations of how the program should
+	behave.  To solve this problem, I've made the Mac version of the GGetMenuBar()
+	display the menu bar at the top of the screen, while in Windows, the same
+	function displays it inside the first window the program creates.  As much
+	as possible, I've kept these kinds of implementation details hidden beneath
+	a common API.
+
+	For features which simply have no equivalent in one system or the other,
+	I have chosen not to extend GUIlib to support features which aren't already
+	there.  For instance, on the Macintosh programs can display an icon inside
+	a menu item, along with the menu item's text.  Windows can't do this,
+	but it can replace the menu item with a bitmap (which the Macintosh cannot!)
+	Therefore, the function GSetMenuItemIcon() does nothing in Windows, and
+	the function GSetMenuItemBitmap() does nothing on the Mac.  There are a
+	few more instances like these, and most are relatively minor.
+
+	I've tried to keep things as simple as possible, with GUILib acting as
+	an overlay to the native OS, rather than a replacement for it.  I have
+	explicitly NOT tried to emulate one OS on top of another (the MFC approach).
+	Doing so would most likely generate applications which run poorly on and
+	feel wrong to users of both platforms.
+
+	Finally, no matter how much of the native OS is hidden away beneath a
+	common cross-platform API, there are -still- going to be some application-
+	specific features which must (and should!) differ from one platform to the
+	next.  Sometimes it's a matter of style.  On the Macintosh, the "About..."
+	menu item is ALWAYS the first item under the "Apple" menu, while in Windows,
+	it's always placed under the "Help" menu.  There's no way this: some of your
+	code is going to have to be platform-specific.  But the vast majority can
+	be common, especially if you stick with a reasonably limited set of interface
+	elements.  You can do an awful lot with just windows, menus, buttons, and
+	scroll bars.  These elements behave almost exactly the same way on both
+	platforms, and GUILib supports them all.
+
+	Note that GUILib does not prevent you from add platfrom-specific code which
+	calls the native OS directly, if the need arises.  You are free to create
+	and use custom Windows controls or Macintosh 'CDEF's if you wish.  Obviously
+	such things will only work on one platform; but again, some platform-specific
+	behavior is unavoidable and in fact necessary.  I leave the judgement up
+	to you... have fun!
+
+	-Tim DeBenedictis 19 June 1995
+
+******************************************************************************/
+
+THINGS TO DO:
+
+Windows:
+
+GUILibCleanUp() should automatically destroy the application's main window
+if the application hasn't already done so before it calls PostQuitMessage().
+This will involve making sure that the WndProcs for the main window(s)
+set the global handle to the main window to NULL on WM_DESTROY messages.
+
+GGetFrontWindow(), GGetActiveWindow(), etc: Need to define these better.
+GGetNextWindow(): need to figure out how to implement this without crashing.
+How do I implement cursor switching?
+Should I allow non-MDI multiple-window applications?
+How do I implement floating palette windows?
+Should I allow multiple menu bars?
+Should I use CS_OWNDC everywhere?
+Accessor functions for gMenuBar and gAccelerator globals.
+
+Mac:
+
+Need to write GCenterWindow().
+Scrolling styled text.  WASTE?
+Automatic handling of cut/copy/paste menu items.
+List box custom controls.
+Resize events for window tiling, cascading, etc. functions.
+
+Both:
+
+GetPort/SetPort() equivalents (see above).
+Macros for GDoInfoAlert(), GDoWarningAlert(), GDoErrorAlert(), etc.
+Need to write GDispatchEvent() function.  Do away with G_NULL_EVENT?
+Decide on name for GUILib equivalent of WM_CREATE/WM_INITDIALOG.  (G_OPEN_EVENT?)
+Need to pick a better variable-naming convention.
+Need to decide what to do with HARDWARE.C, KEYBOARD.C, MOUSE.C.  Write SCREEN.C?
+Need to write GIsFrontApp() on both platforms.
+
+Need to write GIsXXXWindow() functions.
+
