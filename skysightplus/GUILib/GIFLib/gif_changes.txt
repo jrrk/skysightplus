@@ -1,0 +1,151 @@
+This directory contains a modified version of the GIF library 4.1 files.
+These modified files should probably be considered version 5.0, since they
+are not be binary- or source-code compatible with the previous version.
+
+The modifications made include bug fixes, easier GIF89a feature usage,
+and Mac OS/Metrowerks compatibility.
+
+* in gif_lib.h, changed the prototype for function EgifOpen() to EGifOpen()
+  (e.g. capitalized the function name EGifOpen().)  This misspelling
+  prevented references to that function from compiling properly in
+  Metrowerks.
+  
+* in gif_lib.h and gif_font.c, renamed functions DrawText(), DrawBox(),
+  DrawRectangle(), DrawBoxedText() to GifDrawText(), GifDrawBox(), etc.
+  This avoids a name conflict with Mac OS Toolbox functions of the same
+  names.
+
+* in dgif_lib.c, modified the following lines at the start of the file:
+
+  #include <sys/types.h>
+  #include <sys/stat.h>
+
+  After modification, these lines were changed to:
+  
+  #ifdef __MWERKS__
+  #include <unistd.h>
+  #else
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  #endif
+
+  The Metrowerks environment does not include the <sys/*.h> headers;
+  instead, the functions in those headers are contained in <unistd.h>
+  These modifications ensure that the code will compile under Metrowerks.
+  
+* In egif_lib.h, changed the same lines at the beginning of the file to:
+
+  #ifdef __MWERKS__
+  #include <unistd.h>
+  #else
+  #define S_IREAD 0
+  #define S_IWRITE 0
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  #endif
+
+  The reason for this change is the same as for the corresponding change
+  in dgif_lib.h; additionally, the constants S_IREAD and S_IWRITE are set
+  to zero, since the Metrowerks environment does not #define them.  (This
+  allows Metrowerks to compile the function EGifOpenFileName().)
+  
+* In the file gif_hash.c, modified the same lines at the start of the file
+  as follows:
+
+  #ifdef __MWERKS__
+  #include <stdlib.h>
+  #else
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  #endif
+
+  As mentioned previously, the Metrowerks environment does not provide the
+  <sys/*.h> headers; however, this source file does reference the malloc()
+  function, which is prototyped in <sydlib.h> in Metrowerks.
+
+* In dgif_lib.c and egif_lib.c, placed the following lines around the
+  functions DGifOpenFileHandle() and EGifOpenFileHandle():
+  
+  #ifndef __MWERKS__
+  #endif
+  
+  This prevents those functions from being compiled in the Metrowerks
+  environment, which is required because Metrowerks does not support
+  the fdopen() function.  You should not use this function when building
+  under Metrowerks; use DGifOpenFile() or DGifOpenFileName() instead.
+
+* In egif_lib.c, added the following lines to function EGifOpen():
+
+	if ((Private->HashTable = _InitHashTable()) == NULL) {
+		free(GifFile);
+		free(Private);
+		_GifError = E_GIF_ERR_NOT_ENOUGH_MEM;
+		return NULL;
+	}
+  
+  These lines should be added right after the block which allocates
+  the Private structure:
+  
+	if ((Private = (GifFilePrivateType *)
+		malloc(sizeof(GifFilePrivateType))) == NULL) {
+	    free(GifFile);
+	    _GifError = E_GIF_ERR_NOT_ENOUGH_MEM;
+     	return NULL;
+	}
+
+  This appears to be a bug in the GIF library -- without the additional
+  lines which initialize the hash table, the library crashes on subsequent
+  calls to EGifPutImageDesc(), which tries to clear the hash table (which
+  has not yet been initialized!)  Note that these lines are present in
+  EGifOpenFileName() and EGifOpenFileHandle(); if they are added to
+  EGifOpen(), the library will run correctly.
+
+* Added two new functions:
+
+  DGifGetGraphicControlExtension() in dgif_lib.c
+  EGifPutGraphicControlExtension() in egif_lib.c
+  
+  These new functions make GIF89a features like transparency and animation
+  much easier to use.  The first function decodes a buffer containing raw
+  GIF89a Graphic Control Extension bytes into individual transparency, frame
+  delay, etc. properties.  The second function encodes those properties into
+  an extension and writes it to a GIF file.
+  
+* Added a new field, Version, to the GifFileType structure.  This field is
+  a six-character string indicating the version of the GIF file to be used,
+  i.e. "GIF87a" or "GIF89a".  Several constants related to GIF version
+  stamping were moved into gif_lib.h, so they are now globally accessible.
+  These constants are as follows:
+  
+	#define GIF87_STAMP	"GIF87a"
+	#define GIF89_STAMP	"GIF89a"
+	#define GIF_STAMP	"GIFVER"
+	#define GIF_STAMP_LEN	6
+	#define GIF_VERSION_POS	3
+
+  Previously, the GIF library stored the version stamp in a local variable
+  (when decoding GIF files) or in a static buffer (when encoding/writing
+  them).  In the first case, this scheme made it impossible for a user of
+  the library to determine whether a GIF87a or GIF89a file is being read.
+  In the second case, storing the version stamp statically makes the library
+  unsafe for multi-threading, which is contrary to the library's design
+  philosophy.
+  
+  The new scheme is both thread-safe and lets the user determine the GIF
+  file version after reading the file.  To do the latter, simply examine
+  the contents of the GifFileType.Version field after reading the file.
+  
+  When new GIF files are being encoded/written, the GIF version stamp is
+  set to GIF87a by default, but it can be changed to GIF89a (or back again!)
+  by calling EGifSetGifVersion() -- see below.  Note that you should set
+  the GIF version right after calling EGifOpen(), but before calling
+  EGifPutScreenDesc(), since the latter function actually writes the version
+  stamp to the GIF file.
+  
+* Changed the function EGifSetGifVersion().  The new function now modifies
+  the new Version field within a GifFileType record, as opposed to modifying
+  the global, static version stamp buffer which existed before.  This new
+  scheme makes the library thread-safe (as mentioned above); the old, static
+  buffer has been removed.
+  
+  
