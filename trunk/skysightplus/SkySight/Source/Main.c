@@ -62,7 +62,7 @@ int GMain ( short event, GWindowPtr window, long param1, long param2 )
 			}
 			else
 			{
-        		ShowSplashScreen ( 3 * G_TICKS_PER_SECOND );
+        		ShowSplashScreen ( G_TICKS_PER_SECOND / 4);
 
 				window = CreateMainWindow();
 				if ( window != NULL )

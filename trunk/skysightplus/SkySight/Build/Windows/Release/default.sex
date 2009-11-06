@@ -1,0 +1,80 @@
+# Default configuration file for SExtractor V1.2
+# EB 18/12/96
+
+#-------------------------------- Catalog ------------------------------------
+
+CATALOG_NAME	testcat.txt	# name of the output catalog
+CATALOG_TYPE	ASCII		# "ASCII" or "FITS"
+
+PARAMETERS_NAME	default.par     # name of the file containing catalog contents
+
+#------------------------------- Extraction ----------------------------------
+
+DETECTION_TYPE	CCD		# "CCD" or "PHOTO"
+EXTRACT_MINAREA	5		# minimum number of pixels above threshold
+THRESHOLD_TYPE SIGMA
+THRESHOLD	3.0		# <sigmas> or <threshold>,<ZP> in mag.arcsec-2
+
+DEBLEND_NTHRESH	32		# Number of deblending sub-thresholds
+DEBLEND_MINCONT	0.005		# Minimum contrast parameter for deblending
+
+CLEAN		Y		# Clean spurious detections? (Y or N)?
+CLEAN_PARAM	1.0		# Cleaning efficiency
+CLEAN_OBJSTACK	1000		# Size of the buffer containing objects
+
+#------------------------------ Photometry -----------------------------------
+
+PHOTOM_APERTURE	5		# MAG_APER aperture diameter(s) in pixels
+PHOTOM_KPAR 2.5
+PHOTOM_KSIG 3.5
+PHOTOM_KMINSIG 1
+
+SATUR_LEVEL	50000.0		# level (in ADUs) at which arises saturation
+
+MAG_ZEROPOINT	0.0		# magnitude zero-point
+MAG_GAMMA	4.0		# gamma of emulsion (for photographic scans)
+GAIN		0.0		# detector gain in e-/ADU.
+PIXEL_SCALE	1.0		# size of pixel in arcsec.
+
+#------------------------- Star/Galaxy Separation ----------------------------
+
+SEEING_FWHM	1.2		# stellar FWHM in arcsec
+STARNNW_NAME	default.nnw	# Neural-Network_Weight table filename
+
+#------------------------------ Background -----------------------------------
+
+BACK_XSIZE	64		# Background mesh: <size> or <width>,<height>
+BACK_YSIZE	64		# Background mesh: <size> or <width>,<height>
+BACK_FLTRXSIZE	1		# Background filter: <size> or <width>,<height>
+BACK_FLTRYSIZE	1		# Background filter: <size> or <width>,<height>
+
+BACKPHOTO_TYPE  LOCAL           # may be GLOBAL or LOCAL
+BACKPHOTO_THICK	24		# thickness of the background LOCAL annulus
+
+#------------------------------ Check Image ----------------------------------
+
+CHECKIMAGE_TYPE	OBJECTS		# can be one of NONE, BACKGROUND,
+				# MINIBACKGROUND,-BACKGROUND, OBJECTS,
+				# SEGMENTATION, APERTURES or FILTERED
+CHECKIMAGE_NAME	check.fits	# Filename for the check-image
+
+#--------------------- Memory (change with caution!) -------------------------
+
+MEMORY_PIXSTACK	100000		# number of pixels in stack
+MEMORY_BUFSIZE	512		# number of lines in buffer
+
+#---------------- Scanning parameters (change with caution!) -----------------
+
+SCAN_ISOAPRATIO	0.6		# maximum isoph. to apert ratio allowed
+
+#----------------------------- Miscellaneous ---------------------------------
+
+VERBOSE_TYPE	FULL		# may be QUIET, NORMAL or FULL
+
+#------------------------------- New Stuff -----------------------------------
+
+# Surprise!!
+CONVOLVE y
+CONVOLVE_NAME 	default.conv
+CONVOLVE_NORM y
+
