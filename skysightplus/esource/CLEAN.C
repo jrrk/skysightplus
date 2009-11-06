@@ -48,8 +48,8 @@ Terminate things for CLEANing.
 */
 void	endclean()
   {
-  free(cleanvictim);
-  free(field.cleanobjlist);
+  myfree(cleanvictim);
+  myfree(field.cleanobjlist);
   return;
   }
 
@@ -127,13 +127,13 @@ void	addcleanobj(int objnb, objliststruct *objlistin,
 /*Update the object list */
   if (cleanobjlist->nobj)
     {
-    if (!(cleanobjlist->obj = (objstruct *)realloc(cleanobjlist->obj,
+    if (!(cleanobjlist->obj = (objstruct *)myrealloc(cleanobjlist->obj,
 		    (++cleanobjlist->nobj) * sizeof(objstruct))))
       error(EXIT_FAILURE, "Not enough memory for ", "CLEANing");
     }
   else
     {
-    if (!(cleanobjlist->obj = (objstruct *)malloc((++cleanobjlist->nobj)
+    if (!(cleanobjlist->obj = (objstruct *)myalloc((++cleanobjlist->nobj)
 		    * sizeof(objstruct))))
       error(EXIT_FAILURE, "Not enough memory for ", "CLEANing");
     }
@@ -211,12 +211,12 @@ void	subcleanobj(int objnb, objliststruct *cleanobjlist)
 
   if (cleanobjlist->nobj)
     {
-    if (!(cleanobjlist->obj = (objstruct *)realloc(cleanobjlist->obj,
+    if (!(cleanobjlist->obj = (objstruct *)myrealloc(cleanobjlist->obj,
 		    cleanobjlist->nobj * sizeof(objstruct))))
       error(EXIT_FAILURE, "Not enough memory for ", "CLEANing");
     }
   else
-    free(cleanobjlist->obj);
+    myfree(cleanobjlist->obj);
 
   return;
   }

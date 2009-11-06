@@ -66,7 +66,9 @@ void	makeback()
 /*allocate some memory */
 
   for (i=0; i<nx; i++)
+  {
     QMALLOC(backmesh, backstruct, nx);		/* background information */
+  }
   QMALLOC(buf, PIXTYPE, bufsize);		/* pixel buffer */
   QMALLOC(field.back, float, field.nback);	/* background map */
   QMALLOC(sig, float, field.nback);		/* temporary sigma map */
@@ -103,7 +105,7 @@ void	makeback()
         bufsize = (nlines = n/step)*w;
         bufshift = (step/2)*w*sizeof(PIXTYPE);
         jumpsize = (step-1)*w*sizeof(PIXTYPE);
-        free(buf);
+        myfree(buf);
         QMALLOC(buf, PIXTYPE, bufsize);		/* pixel buffer */
         }
 
@@ -139,7 +141,7 @@ void	makeback()
       {
       k = m+nx*j;
       backguess(&backmesh[m], &field.back[k], &sig[k]);
-      free(backmesh[m].histo);
+      myfree(backmesh[m].histo);
       }
     }
 
@@ -155,11 +157,11 @@ void	makeback()
       error(EXIT_SUCCESS, "Constant image - ", "no source found.");
     }
 
-/*free memory */
+/*myfree memory */
 
-  free(sig);
-  free(buf);
-  free(backmesh);
+  myfree(sig);
+  myfree(buf);
+  myfree(backmesh);
 
 /*go back to the original position */
 
@@ -257,10 +259,10 @@ void	filterback()
   npy = nx*(field.nbackfy/2);
   back = field.back;
 
-  if (!(mask = (float *)malloc(field.nbackfx*field.nbackfy*sizeof(float))))
+  if (!(mask = (float *)myalloc(field.nbackfx*field.nbackfy*sizeof(float))))
     error (EXIT_FAILURE, "*Error*: not enough memory in ", "filterback()");
 
-  if (!(all = (float *)malloc(np*sizeof(float))))
+  if (!(all = (float *)myalloc(np*sizeof(float))))
     error (EXIT_FAILURE, "*Error*: not enough memory in ", "filterback()");
 
   for (py=0; py<np; py+=nx)
@@ -281,8 +283,8 @@ void	filterback()
 
   field.backmean = hmedian(all, np);
 
-  free(mask);
-  free(all);
+  myfree(mask);
+  myfree(all);
 
   return;
   }
@@ -429,10 +431,10 @@ float	localback(objstruct *obj)
       if (bin>=0 && bin<backmesh.nlevels)
       backmesh.histo[bin]++;
       }
-    free(backpix);
+    myfree(backpix);
     backguess(&backmesh, &bkg, &obj->sigbkg);
     obj->bkg += (obj->dbkg = bkg);
-    free(backmesh.histo);
+    myfree(backmesh.histo);
     }
   else
     {

@@ -14,23 +14,32 @@
 *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
 
+#include    <Windows.h>
 #include	<ctype.h>
 #include	<stdio.h>
 #include	<stdlib.h>
 #include	<assert.h>
-
+#include    <stdarg.h>
 #include	"define.h"
 #include	"globals.h"
-
 
 /********************************* error ************************************/
 /*
 I hope it will never be used!
 */
-void	error(int num, char *msg1, char *msg2)
+void	error(int num, char *msg1, ...)
   {
-  fprintf(stderr, "\n> %s%s\n\n",msg1,msg2);
-  fflush(stderr);
+	char	szTitle[64];
+    int		nResult;
+    UINT    fuStyle = 0;
+  char linbuf[256];
+  va_list args;
+  va_start (args, msg1);
+  vsprintf (linbuf, msg1, args);
+  va_end (args);
+  fuStyle = MB_ICONSTOP|MB_OK;
+  GetWindowText ( GetActiveWindow(), szTitle, 63 );
+  nResult = MessageBox ( GetActiveWindow(), linbuf, szTitle, fuStyle );
   sexit(num);
   }
 

@@ -212,18 +212,13 @@ void FindImageWindowImageObjects ( GWindowPtr window, PIXEL minlimit, PIXEL maxl
 	ImagePtr		imageptr;
 	ImageRegionPtr	region;
 	double			params[5], errors[5];
-	char *path;
-	char l_name[ MAX_PATH + 1 ];
-	l_name[ sizeof( l_name ) -1] = 0;
-	GetModuleFileName( NULL, l_name, sizeof( l_name ) -1 );
 
 	imageptr  = GetImageWindowImage ( window );
+
+#if 0
 	frames = GetImageFrames ( imageptr );
 	rows   = GetImageRows ( imageptr );
 	cols   = GetImageColumns ( imageptr );
-
-	path = imageptr->imagePath;
-#if 0
 	for ( frame = 0; frame < frames; frame++ )
 	{
 		min = HUGE_VAL;
@@ -245,10 +240,7 @@ void FindImageWindowImageObjects ( GWindowPtr window, PIXEL minlimit, PIXEL maxl
 	fprintf(stderr, "Min %f\n", min);
 	fprintf(stderr, "Max %f\n", max);
 #endif
-	{
- 	char *argv[] = {l_name, path};
-	sextract_main(sizeof(argv)/sizeof(*argv), argv);
-	}
+	protected_sextract_main(imageptr->imagePath);
 }
 
 #else

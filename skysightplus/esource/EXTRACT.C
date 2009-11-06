@@ -57,12 +57,12 @@ Free once for all memory space for buffers used by lutz().
 */
 void	lutzfree()
   {
-  free(info);
-  free(store);
-  free(marker);
-  free(psstack);
-  free(start);
-  free(end);
+  myfree(info);
+  myfree(store);
+  myfree(marker);
+  myfree(psstack);
+  myfree(start);
+  myfree(end);
 
   return;
   }
@@ -108,7 +108,7 @@ int	lutz(int stx, int enx, int sty, int eny, int minarea,
 /*------Allocate memory to store object data */
 
   QFREE(objlist->obj);
-  if (!(obj = objlist->obj =(objstruct *)malloc(nobjm * sizeof(objstruct))))
+  if (!(obj = objlist->obj =(objstruct *)myalloc(nobjm * sizeof(objstruct))))
     {
     out = RETURN_FATAL_ERROR;
     goto exit_lutz;
@@ -118,7 +118,7 @@ int	lutz(int stx, int enx, int sty, int eny, int minarea,
 
   QFREE(objlist->plist);
   if (!(pixel = objlist->plist
-	= (pliststruct *)malloc((eny-sty)*(enx-stx)*sizeof(pliststruct))))
+	= (pliststruct *)myalloc((eny-sty)*(enx-stx)*sizeof(pliststruct))))
     {
     out = RETURN_FATAL_ERROR;
     goto exit_lutz;
@@ -235,7 +235,7 @@ int	lutz(int stx, int enx, int sty, int eny, int minarea,
                 {
                 if (objlist->nobj>=nobjm)
                   if (!(obj = objlist->obj = (objstruct *)
-  			realloc(obj, (nobjm+=nobjm/2)* sizeof(objstruct))))
+  			myrealloc(obj, (nobjm+=nobjm/2)* sizeof(objstruct))))
                     {
                     out = RETURN_FATAL_ERROR;
                     goto exit_lutz;
@@ -286,9 +286,9 @@ exit_lutz:
 
    if (objlist->nobj && out == RETURN_OK)
     {
-    if (!(objlist->obj=(objstruct *)realloc(obj,
+    if (!(objlist->obj=(objstruct *)myrealloc(obj,
 		objlist->nobj*sizeof(objstruct))))
-      error(EXIT_FAILURE,"problem with mem. realloc. in lutz()","");
+      error(EXIT_FAILURE,"problem with mem. myrealloc. in lutz()","");
     }
   else
     {
@@ -298,8 +298,8 @@ exit_lutz:
 
   if (cn && out == RETURN_OK)
     {
-    if (!(objlist->plist=(pliststruct *)realloc(pixel,cn*sizeof(pliststruct))))
-      error(EXIT_FAILURE,"problem with mem. realloc. in lutz()","");
+    if (!(objlist->plist=(pliststruct *)myrealloc(pixel,cn*sizeof(pliststruct))))
+      error(EXIT_FAILURE,"problem with mem. myrealloc. in lutz()","");
     }
   else
     {

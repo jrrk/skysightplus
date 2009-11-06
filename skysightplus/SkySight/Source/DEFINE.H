@@ -43,7 +43,7 @@ extern FILE *logfile;
 #define	NISO			8		/* number of isophotes */
 #define	DATA_BUFSIZE		262144		/* data buffer size */
 #define	BACK_BUFSIZE		1048576		/* bkgnd buffer */
-#define	MAXCHAR			256		/* max. number of characters */
+#define MAXCHAR     0x7f        
 #define	MAXPICSIZE		65534		/* max. image size */
 #ifndef PI
 #define	PI			3.14159265359	/* never met before? */
@@ -121,34 +121,34 @@ We must have:	0 < QUANTIF_NSIGMA <= 10
 
 #define QFREAD(ptr, size, file, fname) \
 		if (fread(ptr, (size_t)(size), (size_t)1, file)!=1) \
-		  error(EXIT_FAILURE, "*Error* while reading ", fname)
+		  error(EXIT_FAILURE, "*Error* while reading %s", fname)
 
 #define QFWRITE(ptr, size, file, fname) \
 		if (fwrite(ptr, (size_t)(size), (size_t)1, file)!=1) \
-		  error(EXIT_FAILURE, "*Error* while writing ", fname)
+		  error(EXIT_FAILURE, "*Error* while writing %s", fname)
 
 #define	QFSEEK(file, offset, pos, fname) \
 		if (fseek(file, (offset), pos)) \
-		  error(EXIT_FAILURE,"*Error*: file positioning failed in ", \
+		  error(EXIT_FAILURE,"*Error*: file positioning failed in %s", \
 			fname)
 
 #define	QFTELL(pos, file, fname) \
 		if ((pos=ftell(file))==-1) \
-		  error(EXIT_FAILURE,"*Error*: file position unknown in ", \
+		  error(EXIT_FAILURE,"*Error*: file position unknown in %s", \
 			fname)
 
 
-#define	QFREE(x)	if (x)	free(x)
+#define	QFREE(x)	if (x)	myfree(x)
 
 #define	QCALLOC(ptr, typ, nel) \
-		if (!(ptr = (typ *)calloc((size_t)(nel),sizeof(typ)))) \
-		  error(EXIT_FAILURE, "Not enough memory for ", \
-			#ptr " (" #nel " elements) !")
+		if (!(ptr = (typ *)mycalloc((size_t)(nel),sizeof(typ)))) \
+		  error(EXIT_FAILURE, "Not enough memory for " \
+			#typ " (%d) (" #nel " (%d) elements) !", sizeof(typ), nel)
 
 #define	QMALLOC(ptr, typ, nel) \
-		if (!(ptr = (typ *)malloc((size_t)(nel)*sizeof(typ)))) \
-		  error(EXIT_FAILURE, "Not enough memory for ", \
-			#ptr " (" #nel " elements) !")
+		if (!(ptr = (typ *)myalloc((size_t)(nel)*sizeof(typ)))) \
+		  error(EXIT_FAILURE, "Not enough memory for " \
+			#typ " (%d) (" #nel " (%d) elements) !", sizeof(typ), nel)
 
 #define	RINT(x)	(int)(floor(x+0.5))
 

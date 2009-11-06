@@ -108,7 +108,7 @@ void	makeit()
   fclose(field.file);
   closecat();
 
-  free(bufdata);		/* free some memory */
+  myfree(bufdata);		/* free some memory */
   QFREE(field.conv);
   QFREE(field.back);
   /* QFREE(field.strip); */
