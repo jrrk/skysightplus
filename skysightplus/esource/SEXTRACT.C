@@ -20,6 +20,7 @@
 #include	<string.h>
 #include	<assert.h>
 #include    <setjmp.h>
+#include    <windows.h>
 #include	"define.h"
 #include	"globals.h"
 
@@ -35,10 +36,16 @@ int	sextract_main(int argc, char *argv[])
   {
    int		a, narg, jmpret;
    char		**argkey, **argval;
+   char *ptr1, p_name[ MAX_PATH + 1 ];
+   strcpy(p_name, argv[0]);
+   ptr1 = strrchr(p_name, '\\');
+   if (ptr1) strcpy(ptr1, "\\default.sex");
 
    jmpret = setjmp( mark );
    if( jmpret == 0 )
    {
+  
+
   QMALLOC(argkey, char *, argc);
   QMALLOC(argval, char *, argc);
 
@@ -47,8 +54,8 @@ int	sextract_main(int argc, char *argv[])
   logfile = fopen("logfile.txt", "wt");
 
   prefs.pipe_flag = 0;
-  strcpy(prefs.image_name, "M32.fit");
-  strcpy(prefs.prefs_name, "C:\\Documents and Settings\\jrrk.JRRK-STUDY\\My Documents\\skysight\\SkySight\\Build\\Windows\\default.sex");
+  strcpy(prefs.image_name, argv[1]);
+  strcpy(prefs.prefs_name, p_name);
   narg = 0;
 
   for (a=1; a<argc; a++)
@@ -76,6 +83,13 @@ int	sextract_main(int argc, char *argv[])
   QFREE(argkey);
   QFREE(argval);
 
+  if (ptr1)
+	{
+	  sprintf(ptr1, "\\%s", prefs.param_name);
+	  strcpy(prefs.param_name, p_name);
+	  sprintf(ptr1, "\\%s", prefs.conv_name);
+	  strcpy(prefs.conv_name, p_name);
+  }
   makeit();
 
   NFPRINTF(OUTPUT, "All done");

@@ -223,7 +223,7 @@ void FindImageWindowImageObjects ( GWindowPtr window, PIXEL minlimit, PIXEL maxl
 	cols   = GetImageColumns ( imageptr );
 
 	path = imageptr->imagePath;
-
+#if 0
 	for ( frame = 0; frame < frames; frame++ )
 	{
 		min = HUGE_VAL;
@@ -244,6 +244,7 @@ void FindImageWindowImageObjects ( GWindowPtr window, PIXEL minlimit, PIXEL maxl
 	}
 	fprintf(stderr, "Min %f\n", min);
 	fprintf(stderr, "Max %f\n", max);
+#endif
 	{
  	char *argv[] = {l_name, path};
 	sextract_main(sizeof(argv)/sizeof(*argv), argv);
