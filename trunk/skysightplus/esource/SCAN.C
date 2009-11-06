@@ -94,7 +94,7 @@ void	scanimage()
 
 /*----- Allocate memory for the image buffer */
 
-  if (!(field.strip=(PIXTYPE *)malloc(field.stripheight*field.width
+  if (!(field.strip=(PIXTYPE *)myalloc(field.stripheight*field.width
 	*sizeof(PIXTYPE))))
     error(EXIT_FAILURE,"Not enough memory for the image buffer in ",
 	"scanimage()");
@@ -103,11 +103,11 @@ void	scanimage()
 
   npo = prefs.mem_pixstack;
 
-  if (!(pixel=objlist.plist=(pliststruct *)malloc(npo*sizeof(pliststruct))))
+  if (!(pixel=objlist.plist=(pliststruct *)myalloc(npo*sizeof(pliststruct))))
     error(EXIT_FAILURE, "Not enough memory to store the pixel list in ",
 	"scanimage()");
 
-/*----- at the beginning, the "free" object fills the whole pixel list */
+/*----- at the beginning, the "myfree" object fills the whole pixel list */
 
   freeinfo.firstpix = 0;
   freeinfo.lastpix = (LONG)npo-1;
@@ -287,7 +287,7 @@ void	scanimage()
               {
               if ((int)info[co].pixnb >= prefs.ext_minarea)
                 sortit(&info[co], &objlist);
-/* ------------------------------------ free the chain-list */
+/* ------------------------------------ myfree the chain-list */
 
               pixel[info[co].lastpix].nextpix = freeinfo.firstpix;
               freeinfo.firstpix = info[co].firstpix;
@@ -349,22 +349,22 @@ void	scanimage()
 
 /*Free memory */
 
-  free(field.strip);
+  myfree(field.strip);
   freeparcelout();
   QFREE(pixel);
 
   if (prefs.conv_flag)
-    free(mscan);
+    myfree(mscan);
 
   lutzfree();
-  free(ghisto);
-  free(info);
-  free(store);
-  free(marker);
-  /* free(dumscan);	*/
-  free(psstack);
-  free(start);
-  free(end);
+  myfree(ghisto);
+  myfree(info);
+  myfree(store);
+  myfree(marker);
+  /* myfree(dumscan);	*/
+  myfree(psstack);
+  myfree(start);
+  myfree(end);
 
   return;
   }
@@ -521,12 +521,12 @@ int	createbmp(int no, objliststruct *objlist)
   field.subflag = 1;
 
   if (!(bmp = field.sub =
-	(PIXTYPE *)calloc(field.subwidth*field.subheight,sizeof(PIXTYPE))))
+	(PIXTYPE *)mycalloc(field.subwidth*field.subheight,sizeof(PIXTYPE))))
     return RETURN_FATAL_ERROR;
   if (prefs.conv_flag)
     {
     if (!(cbmp = field.csub =
-	(PIXTYPE *)calloc(field.subwidth*field.subheight,sizeof(PIXTYPE))))
+	(PIXTYPE *)mycalloc(field.subwidth*field.subheight,sizeof(PIXTYPE))))
     return RETURN_FATAL_ERROR;
     }
   else

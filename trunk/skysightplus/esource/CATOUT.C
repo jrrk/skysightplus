@@ -288,8 +288,8 @@ void	initfitscat()
   bufsize = FBSIZE*(1+fitsfind(bufxtnd, "END     ")/36);
   QFWRITE(bufxtnd, bufsize, cat.outfile, prefs.cat_name);
 
-  free(buf);
-  free(bufxtnd);
+  myfree(buf);
+  myfree(bufxtnd);
 
   return;
   }
@@ -400,7 +400,7 @@ void	closecat()
       QFWRITE (buf, nbytes, cat.outfile, prefs.cat_name);
       }
 
-    free(buf);
+    myfree(buf);
     QFREE(fbuf);
     }
   else

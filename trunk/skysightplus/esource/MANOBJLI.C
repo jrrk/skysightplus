@@ -64,12 +64,12 @@ int	addobj(int objnb, objliststruct *objl1, objliststruct *objl2)
 /*------ Update the object list */
 	if (objl2->nobj)
 		{
-		if (!(objl2obj = (objstruct *)realloc(objl2->obj,
+		if (!(objl2obj = (objstruct *)myrealloc(objl2->obj,
 		    (++objl2->nobj) * sizeof(objstruct))))
                       goto exit_addobj;
 		}
 	else
-		if (!(objl2obj = (objstruct *)malloc((++objl2->nobj)
+		if (!(objl2obj = (objstruct *)myalloc((++objl2->nobj)
 		    * sizeof(objstruct))))
                       goto exit_addobj;
 
@@ -79,12 +79,12 @@ int	addobj(int objnb, objliststruct *objl1, objliststruct *objl2)
 		npx++;
 	if (fp)
 		{
-		if (!(plist2 = (pliststruct *)realloc(plist2,
+		if (!(plist2 = (pliststruct *)myrealloc(plist2,
 		    (objl2->npix+=npx) * sizeof(pliststruct))))
                       goto exit_addobj;
 		}
 	else
-		if (!(plist2 = (pliststruct *)malloc((objl2->npix=npx)
+		if (!(plist2 = (pliststruct *)myalloc((objl2->npix=npx)
 			* sizeof(pliststruct))))
                       goto exit_addobj;
 

@@ -19,7 +19,6 @@
 #include	<stdlib.h>
 #include	<string.h>
 #include	<assert.h>
-#include    <setjmp.h>
 #include    <windows.h>
 #include	"define.h"
 #include	"globals.h"
@@ -30,21 +29,15 @@
 /********************************** main ************************************/
 
 FILE *logfile;
-jmp_buf mark;              // Address for long jump to jump to
 
-int	sextract_main(int argc, char *argv[])
+int	unprotected_sextract_main(int argc, char *argv[])
   {
-   int		a, narg, jmpret;
+   int		a, narg;
    char		**argkey, **argval;
    char *ptr1, p_name[ MAX_PATH + 1 ];
    strcpy(p_name, argv[0]);
    ptr1 = strrchr(p_name, '\\');
-   if (ptr1) strcpy(ptr1, "\\default.sex");
-
-   jmpret = setjmp( mark );
-   if( jmpret == 0 )
-   {
-  
+   if (ptr1) strcpy(ptr1, "\\default.sex");  
 
   QMALLOC(argkey, char *, argc);
   QMALLOC(argval, char *, argc);
@@ -67,7 +60,7 @@ int	sextract_main(int argc, char *argv[])
           {
           case 'c':	strcpy(prefs.prefs_name, argv[++a]);
 			break;
-          default:	error(EXIT_SUCCESS,"SYNTAX: ", SYNTAX);
+          default:	error(EXIT_SUCCESS,"SYNTAX: %s", SYNTAX);
           }
       else
         {
@@ -97,12 +90,4 @@ int	sextract_main(int argc, char *argv[])
 
   fclose(logfile);
   return(EXIT_SUCCESS);
-   }
-   else
-	   return jmpret;
-  }
-
-void sexit(int retval)
-{
-	longjmp(mark, retval);
 }

@@ -47,13 +47,13 @@ RSC=rc.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
-# ADD RSC /l 0x409 /i "..\..\..\..\GUILib\Win" /d "NDEBUG"
+# ADD RSC /l 0x809 /i "..\..\..\..\GUILib\Win" /d "NDEBUG"
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib setupapi.lib /nologo /subsystem:windows /machine:I386 /libpath:"..\..\..\..\SBIG\Drivers\Windows\Parallel"
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib setupapi.lib /nologo /subsystem:windows /debug /machine:I386 /libpath:"..\..\..\..\SBIG\Drivers\Windows\Parallel"
 
 !ELSEIF  "$(CFG)" == "SkySight - Win32 Debug"
 
@@ -860,6 +860,10 @@ SOURCE=..\..\..\esource\CONVOLVE.C
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\esource\dlmalloc.c
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\esource\EXTRACT.C
 # End Source File
 # Begin Source File
@@ -873,6 +877,10 @@ SOURCE=..\..\..\esource\FITSUTIL.C
 # Begin Source File
 
 SOURCE=..\..\..\esource\GRAPH.C
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\esource\heapwalk.c
 # End Source File
 # Begin Source File
 

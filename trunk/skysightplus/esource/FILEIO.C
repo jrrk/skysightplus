@@ -346,7 +346,7 @@ void	readimagehead()
 /*-----------------------------------------------------------------------------*/
 
   if (prefs.check_type==CNONE)
-    free(buf);
+    myfree(buf);
   else
     {
     field.fitshead = buf;
@@ -366,7 +366,7 @@ char    *readfitshead(FILE *file, char *filename, int *nblock)
    int     n;
    char    *buf;
 
-  if (!(buf=(char *)malloc((size_t)FBSIZE)))
+  if (!(buf=(char *)myalloc((size_t)FBSIZE)))
     error(EXIT_FAILURE, "*Error*: Not enough memory in ", "readfitshead()");
 
 /*Find the number of FITS blocks of the header while reading it */
@@ -377,7 +377,7 @@ char    *readfitshead(FILE *file, char *filename, int *nblock)
 
   for (n=1; !fitsnfind(buf,"END     ", n); n++)
     {
-    if (!(buf=(char *)realloc(buf, (size_t)(FBSIZE*(n+1)))))
+    if (!(buf=(char *)myrealloc(buf, (size_t)(FBSIZE*(n+1)))))
       error(EXIT_FAILURE, "*Error*: Not enough memory in ", "readfitshead()");
     QFREAD(&buf[FBSIZE*n], FBSIZE, file, filename);
     }
@@ -434,7 +434,7 @@ void	initcheck()
   QFWRITE(field.fitshead, field.fitsheadsize, field.check_file,
 	field.check_name);
 
-  free(field.fitshead);
+  myfree(field.fitshead);
 
   return;
   }
@@ -467,7 +467,7 @@ void	closecheck()
 #			endif
 			QFWRITE(field.check_bmp, field.npix*sizeof(PIXTYPE),
 				field.check_file, field.check_name);
-			free(field.check_bmp);
+			myfree(field.check_bmp);
 			break;
 
     case SEGMENTATION:	padsize = (FBSIZE
@@ -478,7 +478,7 @@ void	closecheck()
 #			endif
 			QFWRITE(field.check_bmp, field.npix*sizeof(USHORT),
 				field.check_file, field.check_name);
-			free(field.check_bmp);
+			myfree(field.check_bmp);
 			break;
     default:		error(EXIT_FAILURE, "*Internal Error* in ",
 				"closecheck()!");

@@ -60,14 +60,14 @@ int	parcelout(objliststruct *objlistin, objliststruct *objlistout)
 /*----- allocate some memory */
 
   if (!son)
-    if (!(son = (short *)malloc(xn*NSONMAX*nbm*sizeof(short))))
+    if (!(son = (short *)myalloc(xn*NSONMAX*nbm*sizeof(short))))
       error(EXIT_FAILURE, "Not enough memory in ", "parcelout()");
   if (!ok)
-    if (!(ok = (short *)malloc(xn*NSONMAX*sizeof(short))))
+    if (!(ok = (short *)myalloc(xn*NSONMAX*sizeof(short))))
       error(EXIT_FAILURE, "Not enough memory in ", "parcelout()");
 
   if (!objlist)
-    if (!(objlist = (objliststruct *)malloc(xn*sizeof(objliststruct))))
+    if (!(objlist = (objliststruct *)myalloc(xn*sizeof(objliststruct))))
       error(EXIT_FAILURE, "Not enough memory in ", "parcelout()");
 
 /* ---- initialize lists of objects */
@@ -135,7 +135,7 @@ int	parcelout(objliststruct *objlistin, objliststruct *objlistout)
                 goto exit_parcelout;
                 }
               if (h>=nbm-1)
-                if (!(son = (short *)realloc(son,
+                if (!(son = (short *)myrealloc(son,
 			xn*NSONMAX*(nbm+=16)*sizeof(short))))
                   {
                   out = RETURN_FATAL_ERROR;
@@ -212,7 +212,7 @@ exit_parcelout:
 
 /******************************* freeparcelout *******************************/
 /*
-free the memory allocated by global pointers in refine.c
+myfree the memory allocated by global pointers in refine.c
 */
 void	freeparcelout(void)
   {
@@ -250,9 +250,9 @@ int	gatherup(objliststruct *objlistin, objliststruct *objlistout)
   out = RETURN_OK;
 
   bnb = (size_t)nobj*sizeof(double);
-  amp = (double *)malloc(bnb);
-  p = (double *)malloc(bnb);
-  n = (int *)malloc(nobj*sizeof(int));
+  amp = (double *)myalloc(bnb);
+  p = (double *)myalloc(bnb);
+  n = (int *)myalloc(nobj*sizeof(int));
 
   if (!(amp && p && n))
     error(EXIT_FAILURE, "Not enough memory in ", "gatherup()");
@@ -267,7 +267,7 @@ int	gatherup(objliststruct *objlistin, objliststruct *objlistout)
   p[0] = 0.0;
   bmwidth = xe-xs + 1;
   npix = bmwidth * (ye-ys+1);
-  if (!(bmp = (char *)calloc(1, npix*sizeof(char))))
+  if (!(bmp = (char *)mycalloc(1, npix*sizeof(char))))
     {
     bmp = 0;
     out = RETURN_FATAL_ERROR;
@@ -305,7 +305,7 @@ int	gatherup(objliststruct *objlistin, objliststruct *objlistout)
 
   objout = objlistout->obj;		/* DO NOT MOVE !!! */
 
-  if (!(pixelout=(pliststruct *)realloc(objlistout->plist,
+  if (!(pixelout=(pliststruct *)myrealloc(objlistout->plist,
 	(objlistout->npix + npix) * sizeof(pliststruct))))
     {
     out = RETURN_FATAL_ERROR;
@@ -353,7 +353,7 @@ int	gatherup(objliststruct *objlistin, objliststruct *objlistout)
     }
 
   objlistout->npix = k;
-  if (!(objlistout->plist = (pliststruct *)realloc(pixelout,
+  if (!(objlistout->plist = (pliststruct *)myrealloc(pixelout,
 	(objlistout->npix) * sizeof(pliststruct))))
     error (-1, "Not enough memory to update pixel list in ", "gatherup()");
 
@@ -363,9 +363,9 @@ int	gatherup(objliststruct *objlistin, objliststruct *objlistout)
 exit_gatherup:
 
   QFREE(bmp);
-  free(amp);
-  free(p);
-  free(n);
+  myfree(amp);
+  myfree(p);
+  myfree(n);
 
   return out;
   }

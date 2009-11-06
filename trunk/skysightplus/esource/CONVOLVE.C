@@ -117,7 +117,7 @@ void	getconv()
 
   field.convh = i/n;
   field.nconv = i;
-  if (!(field.conv = (double *)malloc(i*sizeof(double))))
+  if (!(field.conv = (double *)myalloc(i*sizeof(double))))
     error(EXIT_FAILURE, "Not enough memory in ", "getconv()");
   for (j=0, sum=0.0; j<i; j++)
     sum += fabs(field.conv[j] = d[j]);
