@@ -1,0 +1,702 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+PRINTBOX DIALOG DISCARDABLE  100, 100, 120, 40
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Now printing...",1,4,6,112,12
+    DEFPUSHBUTTON   "Cancel",2,44,22,32,14,WS_GROUP
+END
+
+ASKBOX DIALOG DISCARDABLE  100, 100, 216, 60
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        4,8,19,200,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&OK",1,8,38,40,14
+    PUSHBUTTON      "&Cancel",2,56,38,40,14
+    LTEXT           "Prompt:",3,8,6,200,10
+END
+
+PROGRESSBOX DIALOG DISCARDABLE  64, 91, 192, 45
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Progress"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&Cancel",2,146,5,40,14
+    LTEXT           "",3,8,26,176,10
+    LTEXT           "Task:",1,7,7,132,10
+END
+
+256 DIALOG DISCARDABLE  70, 46, 250, 250
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP
+BEGIN
+    DEFPUSHBUTTON   "&OK",1,205,230,40,14
+    LTEXT           "",2,0,0,250,230,NOT WS_VISIBLE
+END
+
+257 DIALOG DISCARDABLE  144, 91, 128, 66
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Scaling"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        4,65,8,55,12,ES_AUTOHSCROLL
+    LTEXT           "Maximum:",5,8,26,50,10
+    EDITTEXT        6,65,24,55,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&OK",1,8,44,40,14
+    PUSHBUTTON      "&Cancel",2,56,44,40,14
+    LTEXT           "Minimum:",3,8,10,50,10
+END
+
+200 DIALOGEX 0, 0, 264, 152
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_TOOLWINDOW
+CAPTION "Camera Control"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "",2,8,20,240,120,NOT WS_GROUP
+    CONTROL         "",1,"SysTabControl32",0x0,4,4,256,144
+END
+
+201 DIALOG DISCARDABLE  0, 0, 240, 120
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Connect",3,134,43,50,14,BS_CENTER
+    LTEXT           "Camera Type:",4,8,10,50,8,NOT WS_GROUP
+    COMBOBOX        5,64,8,120,121,CBS_DROPDOWNLIST | WS_TABSTOP
+    LTEXT           "Filter Type:",6,7,27,50,8,NOT WS_GROUP
+    COMBOBOX        7,64,25,120,121,CBS_DROPDOWNLIST | WS_TABSTOP
+    LTEXT           "Camera Port:",8,8,45,50,8,NOT WS_GROUP
+    COMBOBOX        9,64,43,60,124,CBS_DROPDOWNLIST | WS_TABSTOP
+END
+
+202 DIALOG DISCARDABLE  0, 0, 240, 120
+STYLE DS_3DLOOK | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Set",3,184,56,40,13,BS_CENTER
+    LTEXT           "Regulation:",4,8,8,48,8,NOT WS_GROUP
+    RADIOBUTTON     "Off",5,64,8,24,8,WS_TABSTOP
+    RADIOBUTTON     "On",6,94,8,24,8,WS_TABSTOP
+    LTEXT           "Setpoint (°C):",13,8,39,48,8,NOT WS_GROUP
+    CONTROL         "",14,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,60,36,
+                    120,15
+    EDITTEXT        15,184,37,40,13
+    LTEXT           "Power Use (%):",7,133,8,48,8,NOT WS_GROUP
+    LTEXT           "100.0",8,187,8,32,8,NOT WS_GROUP
+    LTEXT           "Imager (°C):",11,134,24,40,8,NOT WS_GROUP
+    LTEXT           "+00.0",12,186,24,32,8,NOT WS_GROUP
+    LTEXT           "Ambient (°C):",9,8,24,50,8,NOT WS_GROUP
+    LTEXT           "+00.0",10,67,24,32,8,NOT WS_GROUP
+END
+
+203 DIALOG DISCARDABLE  0, 0, 240, 120
+STYLE DS_3DLOOK | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&Start",3,179,90,50,14,BS_CENTER
+    LTEXT           "Mode:",4,8,8,40,8,NOT WS_GROUP
+    COMBOBOX        5,52,5,60,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dark Frame:",6,8,25,40,8,NOT WS_GROUP
+    COMBOBOX        7,52,22,60,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Resolution:",8,128,8,40,8,NOT WS_GROUP
+    COMBOBOX        9,170,5,60,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Antibloom:",10,128,25,40,8,NOT WS_GROUP
+    COMBOBOX        11,170,22,60,70,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Filter:",12,7,42,40,8,NOT WS_GROUP
+    COMBOBOX        13,52,39,60,70,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CHECKBOX        "&Display image in filter color",14,127,42,100,8
+    LTEXT           "Length:",15,8,59,30,8,NOT WS_GROUP
+    CONTROL         "",16,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,45,56,
+                    130,15
+    EDITTEXT        17,179,57,50,12
+    LTEXT           "Status:",18,8,76,30,8,NOT WS_GROUP
+    LTEXT           "Ready to expose.",19,50,76,118,8,NOT WS_GROUP
+    CONTROL         "",20,"msctls_progress32",0x0,50,92,120,10
+END
+
+204 DIALOG DISCARDABLE  0, 0, 240, 120
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Redraw",3,193,61,40,14,BS_CENTER
+    LTEXT           "Scaling:",4,8,8,36,8,NOT WS_GROUP
+    RADIOBUTTON     "&Automatic",5,56,8,48,8,WS_TABSTOP
+    RADIOBUTTON     "&Manual",6,112,8,48,8,WS_TABSTOP
+    LTEXT           "Minimum:",7,8,25,36,8,NOT WS_GROUP
+    CONTROL         "",8,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,52,21,
+                    136,15
+    EDITTEXT        9,192,21,40,12
+    LTEXT           "Maximum:",10,8,43,36,8,NOT WS_GROUP
+    CONTROL         "",11,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,52,41,
+                    136,15
+    EDITTEXT        12,192,42,40,12
+    LTEXT           "Color Table:",13,8,62,44,8,NOT WS_GROUP
+    COMBOBOX        14,60,62,124,100,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CHECKBOX        "&Live redraw",15,180,8,52,8
+END
+
+205 DIALOG DISCARDABLE  0, 0, 240, 120
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Col:",3,8,8,16,8,NOT WS_GROUP
+    LTEXT           "000",4,32,8,16,8,NOT WS_GROUP
+    LTEXT           "Row:",5,61,8,16,8,NOT WS_GROUP
+    LTEXT           "000",6,88,8,16,8,NOT WS_GROUP
+    LTEXT           "Value:",7,116,8,24,8,NOT WS_GROUP
+    LTEXT           "00000.00",8,148,8,32,8,NOT WS_GROUP
+    LTEXT           "Sum:",9,8,22,48,8,NOT WS_GROUP
+    LTEXT           "000000.00 (000000 pixels)",10,60,22,120,8,NOT WS_GROUP
+    LTEXT           "Minimum:",11,8,36,48,8,NOT WS_GROUP
+    LTEXT           "00000.00 (at col 000, row 000)",12,60,36,120,8,NOT 
+                    WS_GROUP
+    LTEXT           "Maximum:",13,8,50,48,8,NOT WS_GROUP
+    LTEXT           "00000.00 (at col 000, row 000)",14,60,50,120,8,NOT 
+                    WS_GROUP
+    LTEXT           "Mean:",15,8,64,48,8,NOT WS_GROUP
+    LTEXT           "00000.00 (std. dev.: 000.00)",16,60,64,120,8,NOT 
+                    WS_GROUP
+END
+
+259 DIALOG DISCARDABLE  0, 0, 201, 93
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+CAPTION "RGB Combine"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&OK",1,8,73,50,14,BS_CENTER
+    PUSHBUTTON      "&Cancel",2,68,73,50,14,BS_CENTER
+    LTEXT           "Red component:",3,12,9,60,8,NOT WS_GROUP
+    COMBOBOX        4,84,9,108,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Green component:",5,12,30,60,8,NOT WS_GROUP
+    COMBOBOX        6,84,30,108,62,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Blue component:",7,12,51,60,13,NOT WS_GROUP
+    COMBOBOX        8,84,51,108,56,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+END
+
+260 DIALOG DISCARDABLE  0, 0, 226, 95
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+CAPTION "RGB Balance"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&OK",1,8,74,50,14,BS_CENTER
+    PUSHBUTTON      "&Cancel",2,68,74,50,14,BS_CENTER
+    LTEXT           "Red:",3,8,12,32,8,NOT WS_GROUP
+    CONTROL         "",4,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,40,9,128,
+                    17
+    EDITTEXT        5,176,11,40,12
+    LTEXT           "Green:",6,8,33,32,8,NOT WS_GROUP
+    CONTROL         "",7,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,40,30,
+                    128,14
+    EDITTEXT        8,176,31,40,12
+    LTEXT           "Blue:",9,8,54,32,8,NOT WS_GROUP
+    CONTROL         "",10,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,40,50,
+                    128,17
+    EDITTEXT        11,176,53,40,12
+END
+
+261 DIALOG DISCARDABLE  0, 0, 212, 120
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+CAPTION "Trim Image"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&OK",1,6,100,50,14,BS_CENTER
+    PUSHBUTTON      "&Cancel",2,64,100,50,14,BS_CENTER
+    RADIOBUTTON     "Trim image to current &selection; or",3,8,9,124,12,
+                    WS_TABSTOP
+    RADIOBUTTON     "Trim pixels from sides of image:",4,8,25,124,12,
+                    WS_TABSTOP
+    LTEXT           "Left:",5,20,44,32,8,NOT WS_GROUP
+    EDITTEXT        6,64,43,44,12
+    LTEXT           "Right:",7,120,43,32,8,NOT WS_GROUP
+    EDITTEXT        8,160,43,44,12
+    LTEXT           "Top:",9,20,65,40,8,NOT WS_GROUP
+    EDITTEXT        10,64,65,44,12
+    LTEXT           "Bottom:",11,120,68,36,8,NOT WS_GROUP
+    EDITTEXT        12,160,64,44,12
+    LTEXT           "(Use negative numbers to add pixels.)",13,20,82,176,8,
+                    NOT WS_GROUP
+END
+
+262 DIALOG DISCARDABLE  0, 0, 240, 90
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+CAPTION "Scale Image"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&OK",1,8,67,50,14,BS_CENTER
+    PUSHBUTTON      "&Cancel",2,68,67,50,14,BS_CENTER
+    RADIOBUTTON     "Scale image by &factors:",3,12,9,92,12,WS_TABSTOP
+    CONTROL         "Scale image to actual &size:",4,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,120,9,100,12
+    LTEXT           "Horizontal:",5,24,30,36,8,NOT WS_GROUP
+    EDITTEXT        6,64,30,40,12
+    LTEXT           "Vertical:",7,24,48,36,13,NOT WS_GROUP
+    EDITTEXT        8,64,48,40,12
+    LTEXT           "Width (pixels):",9,132,30,44,8,NOT WS_GROUP
+    EDITTEXT        10,188,28,40,12
+    LTEXT           "Height (pixels):",11,132,49,52,8,NOT WS_GROUP
+    EDITTEXT        12,188,46,40,12
+    CHECKBOX        "Scale image &proportionally",13,132,68,96,12
+END
+
+263 DIALOG DISCARDABLE  0, 0, 169, 105
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+CAPTION "Shift Image"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        4,95,6,40,12,ES_AUTOHSCROLL
+    LTEXT           "pixels",5,143,9,20,8,NOT WS_GROUP
+    LTEXT           "Shift image data down by",6,8,30,80,8,NOT WS_GROUP
+    EDITTEXT        7,95,27,40,12,ES_AUTOHSCROLL
+    LTEXT           "pixels",8,143,30,20,8,NOT WS_GROUP
+    LTEXT           "(Use negative values to shift image left or up.)",9,8,
+                    48,144,8,NOT WS_GROUP
+    CHECKBOX        "&Wrap data around edges of image",10,8,64,124,12
+    DEFPUSHBUTTON   "&OK",1,8,83,40,14,BS_CENTER
+    PUSHBUTTON      "&Cancel",2,58,83,40,14,BS_CENTER
+    LTEXT           "Shift image data right by",3,8,9,80,8,NOT WS_GROUP
+END
+
+211 DIALOG DISCARDABLE  0, 0, 186, 101
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Multiple Exposure Setup"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "&OK",1,129,80,50,14
+    PUSHBUTTON      "&Cancel",2,71,80,50,14
+    LTEXT           "Number of exposures:",3,8,8,72,8
+    EDITTEXT        4,89,7,40,12,ES_AUTOHSCROLL
+    RADIOBUTTON     "Combine exposures into one image",5,7,28,160,10
+    RADIOBUTTON     "Save exposures as separate files named:",6,7,43,148,10
+    PUSHBUTTON      "&Browse...",7,129,59,50,14
+    LTEXT           "",8,19,62,107,8
+END
+
+264 DIALOG DISCARDABLE  0, 0, 287, 73
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Clip Image Data"
+FONT 8, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "&OK",1,240,52,40,14
+    PUSHBUTTON      "&Cancel",2,190,52,40,14
+    LTEXT           "Set values above:",3,7,11,59,8
+    EDITTEXT        5,177,7,40,14,ES_AUTOHSCROLL
+    CONTROL         "",4,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | 
+                    WS_TABSTOP,70,7,100,15
+    LTEXT           "to",6,225,9,8,8
+    EDITTEXT        7,239,7,40,14,ES_AUTOHSCROLL
+    LTEXT           "Set values below:",8,7,31,58,8
+    CONTROL         "",9,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | 
+                    WS_TABSTOP,70,28,100,15
+    EDITTEXT        10,177,28,40,14,ES_AUTOHSCROLL
+    LTEXT           "to",11,225,32,8,8
+    EDITTEXT        12,240,29,40,14,ES_AUTOHSCROLL
+    CHECKBOX        "Live &Preview",13,7,53,56,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+256 MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                25701
+        MENUITEM "&Open...\tCtrl+O",            25702
+        MENUITEM "&Close\tCtrl+W",              25703
+        MENUITEM SEPARATOR
+        MENUITEM "&Save\tCtrl+S",               25705
+        MENUITEM "Save &As...",                 25706
+        MENUITEM SEPARATOR
+        MENUITEM "Page Se&tup...",              25708
+        MENUITEM "&Print...\tCtrl+P",           25709
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       25711
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               25801, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Cut\tCtrl+X",                25803, GRAYED
+        MENUITEM "&Copy\tCtrl+C",               25804, GRAYED
+        MENUITEM "&Paste\tCtrl+V",              25805, GRAYED
+        MENUITEM "Clea&r\tCtrl+B",              25806, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Select &All\tCtrl+A",         25808, GRAYED
+        MENUITEM "Select &None",                25809, GRAYED
+        MENUITEM SEPARATOR
+        POPUP "Color &Frame"
+        BEGIN
+            MENUITEM "&All",                        13801
+            MENUITEM "&Red only",                   13802
+            MENUITEM "&Green only",                 13803
+            MENUITEM "&Blue only",                  13804
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Select",                     25813
+        MENUITEM "&Drag",                       25814
+        MENUITEM "Zoom &In",                    25815
+        MENUITEM "Zoom &Out",                   25816
+        MENUITEM "&Shift",                      25817
+        MENUITEM "&Mark",                       25818
+    END
+    POPUP "&Display"
+    BEGIN
+        POPUP "&Magnification"
+        BEGIN
+            MENUITEM "1600%",                       12901
+            MENUITEM "800%",                        12902
+            MENUITEM "400%",                        12903
+            MENUITEM "200%",                        12904
+            MENUITEM "100%",                        12905
+            MENUITEM "50%",                         12906
+            MENUITEM "25%",                         12907
+            MENUITEM "12.5%",                       12908
+            MENUITEM "6.25%",                       12909
+        END
+        MENUITEM "Zoom &In\tPage Up",           25902
+        MENUITEM "Zoom &Out\tPage Down",        25903
+        MENUITEM "C&rop\tCtrl+R",               25904
+        MENUITEM SEPARATOR
+        POPUP "Color &Table"
+        BEGIN
+            MENUITEM "Grayscale",                   12801
+            MENUITEM "Rainbow",                     12802
+            MENUITEM "Flame",                       12803
+            MENUITEM "Winter",                      12804
+            MENUITEM "Spring",                      12805
+            MENUITEM "Summer",                      12806
+            MENUITEM "Fall",                        12807
+            MENUITEM "Red",                         12808
+            MENUITEM "Green",                       12809
+            MENUITEM "Blue",                        12810
+        END
+        POPUP "Color &Frame"
+        BEGIN
+            MENUITEM "Red + Green + Blue",          13601
+            MENUITEM "Red only",                    13602
+            MENUITEM "Green only",                  13603
+            MENUITEM "Blue only",                   13604
+        END
+        MENUITEM SEPARATOR
+        POPUP "&Mouse coordinates"
+        BEGIN
+            MENUITEM "&None",                       13701
+            MENUITEM "&Column && Row",              13702
+            MENUITEM "&X && Y",                     13703
+            MENUITEM "&R.A. && Dec.",               13704
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Objects",                    25911
+        MENUITEM "Object &Centroids",           25912
+        MENUITEM "Object &Names",               25913
+        MENUITEM SEPARATOR
+        MENUITEM "FITS &Header...",             25915
+        MENUITEM "Histogram...",                25916
+    END
+    POPUP "&Process"
+    BEGIN
+        POPUP "&Add"
+        BEGIN
+            MENUITEM "a &constant...",              13001
+            MENUITEM SEPARATOR
+        END
+        POPUP "&Subtract"
+        BEGIN
+            MENUITEM "a &constant...",              13101
+            MENUITEM SEPARATOR
+        END
+        POPUP "&Multiply by"
+        BEGIN
+            MENUITEM "a &constant...",              13201
+            MENUITEM SEPARATOR
+        END
+        POPUP "&Divide by"
+        BEGIN
+            MENUITEM "a &constant...",              13301
+            MENUITEM SEPARATOR
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Flip &Horizontally",          26006
+        MENUITEM "Flip &Vertically",            26007
+        MENUITEM "&Trim...",                    26008
+        MENUITEM "&Shift...",                   26009
+        MENUITEM "&Scale...",                   26010
+        POPUP "&Rotate"
+        BEGIN
+            MENUITEM "90 degrees",                  13401
+            MENUITEM "180 degrees",                 13402
+            MENUITEM "270 degrees",                 13403
+            MENUITEM "&Other...",                   13404
+        END
+        POPUP "&Convolve"
+        BEGIN
+            MENUITEM "Soft Smooth",                 13501
+            MENUITEM "Hard Smooth",                 13502
+            MENUITEM "Soft Sharpen",                13503
+            MENUITEM "Hard Sharpen",                13504
+            MENUITEM "Gradient",                    13505
+        END
+        MENUITEM "&Invert",                     26013, GRAYED
+        MENUITEM "Cli&p...",                    26014
+        MENUITEM SEPARATOR
+        POPUP "&Align to"
+        BEGIN
+            MENUITEM "",                            13901
+        END
+        POPUP "&Mosaic with"
+        BEGIN
+            MENUITEM "",                            14001
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "RGB &Combine...",             26019
+        MENUITEM "RGB Se&parate",               26020
+        MENUITEM "RGB &Balance...",             26021
+    END
+    POPUP "&Analyze"
+    BEGIN
+        MENUITEM "&Define Object Profile...",   26101
+        MENUITEM "&Find Objects",               26102
+        MENUITEM "&Delete Objects",             26103
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&Tile",                       26201
+        MENUITEM "&Cascade\tShift+F5",          26202
+        MENUITEM "&Arrange Icons\tShift+F4",    26203
+        MENUITEM SEPARATOR
+        MENUITEM "Ca&mera Control",             26205
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About SkySight...",          26301
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+256 ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "^N",           25701,                  ASCII   
+    "^O",           25702,                  ASCII   
+    "^W",           25703,                  ASCII   
+    "^S",           25705,                  ASCII   
+    "^P",           25708,                  ASCII   
+    "^Z",           25801,                  ASCII   
+    VK_BACK,        25801,                  VIRTKEY, ALT
+    "^X",           25803,                  ASCII   
+    VK_DELETE,      25803,                  VIRTKEY, SHIFT
+    "^C",           25804,                  ASCII   
+    VK_INSERT,      25804,                  VIRTKEY, CONTROL
+    "^V",           25805,                  ASCII   
+    VK_INSERT,      25805,                  VIRTKEY, SHIFT
+    "^B",           25806,                  ASCII   
+    VK_DELETE,      25806,                  VIRTKEY 
+    "^A",           25808,                  ASCII   
+    VK_PRIOR,       25902,                  VIRTKEY 
+    VK_NEXT,        25903,                  VIRTKEY 
+    "^R",           25904,                  ASCII   
+    VK_F5,          26202,                  VIRTKEY, SHIFT
+    VK_F4,          26203,                  VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+256                     BITMAP  MOVEABLE PURE   "SplashScreen.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+256                     ICON    DISCARDABLE     "SkySight.ico"
+257                     ICON    DISCARDABLE     "FITSImage.ico"
+258                     ICON    DISCARDABLE     "FITSImage.ico"
+259                     ICON    DISCARDABLE     "FITSImage.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    211, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    264, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    256                     "SkySight public beta release 1.0b1"
+    257                     "Untitled"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    300                     "SkySight can't allocate memory!  If you have other applications running, try quitting them."
+    301                     "SkySight can't open the file ""%s""!  It may be missing or in use by another program."
+    302                     "SkySight can't read the file ""%s""!  It may be corrupted or have an obsolete format."
+    303                     "SkySight can't write the file ""%s""!  The disk may be full."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    310                     "The CCD camera command (%s) generated an error (%d)!"
+    311                     "Remove the obstruction from the camera, to allow light to reach the imager.  When you are finished, press the ""OK"" button."
+    312                     "Place an obstruction in front of the camera, to prevent light from reaching the imager.  When you are finished, press the ""OK"" button."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    350                     "Save changes to the file ""%s"" before closing?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    400                     "Open an image file..."
+    401                     "All Files (*.*)|*.*|FITS files (*.fit)|*.fit|GIF files (*.gif)|*.gif|JPEG files (*.jpg)|*.jpg|TIFF files (*.tif)|*.tif|BMP files (*.bmp)|*.bmp|"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    500                     "Save image as..."
+    501                     "FITS file (*.fit)|*.fit|GIF file (*.gif)|*.gif|JPEG file (*.jpg)|*.jpg|TIFF file (*.tif)|*.tif|TIFF file, 16-bit (*.tif)|*.tif|BMP file (*.bmp)|*.bmp|"
+    510                     "Save histogram as..."
+    511                     "Tab-delimited text file (*.txt)|*.txt|JPEG file|*.jpg|TIFF file|*.tif|Windows Metafile (*.wmf)|*.wmf|"
+END
+
+1 VERSIONINFO
+FILEVERSION 1, 0, 0, 1
+PRODUCTVERSION 1, 0, 0, 1
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "CompanyName", "Southern Stars Systems\000\000"
+   VALUE "FileDescription", "SkySight public beta for Windows 95, 98, and Me\000"
+   VALUE "FileVersion", "1.0b1\000\000"
+   VALUE "InternalName", "SkySight.exe\000"
+   VALUE "LegalCopyright", "©1992-2001 Southern Stars Systems.  All Rights Reserved.\000\000"
+   VALUE "OriginalFilename", "SkySight.exe\000"
+  }
+ }
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x409, 1252
+ }
+}
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
