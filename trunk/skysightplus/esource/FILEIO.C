@@ -367,18 +367,18 @@ char    *readfitshead(FILE *file, char *filename, int *nblock)
    char    *buf;
 
   if (!(buf=(char *)myalloc((size_t)FBSIZE)))
-    error(EXIT_FAILURE, "*Error*: Not enough memory in ", "readfitshead()");
+    error(EXIT_FAILURE, "*Error*: Not enough memory in readfitshead()");
 
 /*Find the number of FITS blocks of the header while reading it */
   QFREAD(buf, FBSIZE, file, filename);
 
   if (strncmp(buf, "SIMPLE  ", 8))
-    error(EXIT_FAILURE, filename, " is NOT a FITS file!");
+    error(EXIT_FAILURE, "Error %s is NOT a FITS file!", filename);
 
   for (n=1; !fitsnfind(buf,"END     ", n); n++)
     {
     if (!(buf=(char *)myrealloc(buf, (size_t)(FBSIZE*(n+1)))))
-      error(EXIT_FAILURE, "*Error*: Not enough memory in ", "readfitshead()");
+      error(EXIT_FAILURE, "*Error*: Not enough memory in readfitshead()");
     QFREAD(&buf[FBSIZE*n], FBSIZE, file, filename);
     }
 
