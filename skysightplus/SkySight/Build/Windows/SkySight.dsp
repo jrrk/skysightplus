@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /Zp2 /W3 /GX /O2 /I "..\..\..\GUILib\Windows" /I "..\..\..\GUILib\JPEGLib" /I "..\..\..\GUILib\GIFLib" /I "..\..\..\GUILib\LibTIFF" /I "..\..\..\AstroLib" /I "..\..\ParLib" /I "..\..\Cookbook" /I "..\..\SX\Windows" /I "..\..\SBIG\Windows" /I "..\..\Source" /I "." /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
+# ADD CPP /nologo /Zp2 /W3 /GX /O2 /I "..\..\..\GUILib\Windows" /I "..\..\..\GUILib\JPEGLib" /I "..\..\..\GUILib\GIFLib" /I "..\..\..\GUILib\LibTIFF" /I "..\..\..\AstroLib" /I "..\..\ParLib" /I "..\..\Cookbook" /I "..\..\SX\Windows" /I "..\..\Source" /I "." /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib setupapi.lib /nologo /subsystem:windows /debug /machine:I386 /libpath:"..\..\..\..\SBIG\Drivers\Windows\Parallel"
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib setupapi.lib /nologo /subsystem:windows /debug /machine:I386
 
 !ELSEIF  "$(CFG)" == "SkySight - Win32 Debug"
 
@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /Zp2 /W3 /Gm /GX /ZI /Od /I "..\..\..\GUILib\Windows" /I "..\..\..\GUILib\JPEGLib" /I "..\..\..\GUILib\GIFLib" /I "..\..\..\GUILib\LibTIFF" /I "..\..\..\AstroLib" /I "..\..\ParLib" /I "..\..\Cookbook" /I "..\..\SX\Windows" /I "..\..\SBIG\Windows" /I "..\..\Source" /I "." /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR /YX /FD /c
+# ADD CPP /nologo /Zp2 /W3 /Gm /GX /ZI /Od /I "..\..\..\GUILib\Windows" /I "..\..\..\GUILib\JPEGLib" /I "..\..\..\GUILib\GIFLib" /I "..\..\..\GUILib\LibTIFF" /I "..\..\..\AstroLib" /I "..\..\ParLib" /I "..\..\Cookbook" /I "..\..\SX\Windows" /I "..\..\Source" /I "." /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR /YX /FD /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
@@ -79,7 +79,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 setupapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept /libpath:"..\..\..\..\SBIG\Drivers\Windows\Parallel"
+# ADD LINK32 setupapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
 
 !ENDIF 
 
@@ -200,10 +200,6 @@ SOURCE=..\..\Source\CameraTypes.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\Source\CookbookCameraInterface.c
-# End Source File
-# Begin Source File
-
 SOURCE=..\..\Source\DemoCameraInterface.c
 # End Source File
 # Begin Source File
@@ -292,10 +288,6 @@ SOURCE=..\..\Source\ProcessMenu.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\Source\SBIGParallelCameraInterface.c
-# End Source File
-# Begin Source File
-
 SOURCE=..\..\Source\SXUSBCameraInterface.c
 # End Source File
 # Begin Source File
@@ -373,14 +365,6 @@ SOURCE=..\..\..\GUILib\Windows\GSound.c
 # Begin Source File
 
 SOURCE=..\..\..\GUILib\Windows\GWindows.c
-# End Source File
-# End Group
-# Begin Group "ParLib sources"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\..\ParLib\ParLib.c
 # End Source File
 # End Group
 # Begin Group "JPEGLib sources"
@@ -795,26 +779,6 @@ SOURCE=..\..\..\GUILib\GIFLib\gifalloc.c
 SOURCE=..\..\Resource\Windows\SkySight.rc
 # End Source File
 # End Group
-# Begin Group "Cookbook sources"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\..\Cookbook\CB245.c
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\Cookbook\Cookbook.c
-# End Source File
-# End Group
-# Begin Group "SBIG sources"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\..\Sbig\Windows\Sbig32m.lib
-# End Source File
-# End Group
 # Begin Group "SX sources"
 
 # PROP Default_Filter "*.c *.cpp"
@@ -919,5 +883,17 @@ SOURCE=..\..\..\esource\SCAN.C
 SOURCE=..\..\..\esource\SEXTRACT.C
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=..\..\Resource\Windows\FITSImage.ico
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\Resource\Windows\SkySight.ico
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\Resource\Windows\SplashScreen.bmp
+# End Source File
 # End Target
 # End Project
