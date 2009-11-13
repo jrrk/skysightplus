@@ -60,16 +60,16 @@ static CameraType sCameraTypes[] =
 //	{ CAMERA_TYPE_SBIG_ST4X, "SBIG ST-4X", SBIGSerialCameraInterface },
 //	{ CAMERA_TYPE_SBIG_ST5, "SBIG ST-5", SBIGSerialCameraInterface },
 //	{ CAMERA_TYPE_SBIG_ST6, "SBIG ST-6", SBIGSerialCameraInterface },
-	{ CAMERA_TYPE_SBIG_ST7_IMAGING, "SBIG ST-7 Imaging Camera", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_SBIG_ST7_TRACKING, "SBIG ST-7 Tracking Camera", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_SBIG_ST8_IMAGING, "SBIG ST-8 Imaging Camera", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_SBIG_ST8_TRACKING, "SBIG ST-8 Tracking Camera", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_SBIG_ST5C, "SBIG ST-5C", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_SBIG_ST237, "SBIG ST-237", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_PIXCEL_255, "Celestron PixCel 255", SBIGParallelCameraInterface },
-	{ CAMERA_TYPE_PIXCEL_237, "Celestron PixCel 237", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_SBIG_ST7_IMAGING, "SBIG ST-7 Imaging Camera", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_SBIG_ST7_TRACKING, "SBIG ST-7 Tracking Camera", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_SBIG_ST8_IMAGING, "SBIG ST-8 Imaging Camera", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_SBIG_ST8_TRACKING, "SBIG ST-8 Tracking Camera", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_SBIG_ST5C, "SBIG ST-5C", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_SBIG_ST237, "SBIG ST-237", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_PIXCEL_255, "Celestron PixCel 255", SBIGParallelCameraInterface },
+//	{ CAMERA_TYPE_PIXCEL_237, "Celestron PixCel 237", SBIGParallelCameraInterface },
 //	{ CAMERA_TYPE_COOKBOOK_211, "Cookbook 211", CookbookCameraInterface },
-	{ CAMERA_TYPE_COOKBOOK_245, "Cookbook 245", CookbookCameraInterface }
+//	{ CAMERA_TYPE_COOKBOOK_245, "Cookbook 245", CookbookCameraInterface }
 };
 
 static short sNumCameraTypes = sizeof ( sCameraTypes ) / sizeof ( sCameraTypes[0] );

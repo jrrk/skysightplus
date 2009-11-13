@@ -167,13 +167,7 @@ CameraInterfaceData, *CameraInterfaceDataPtr;
 
 typedef short (*CameraInterfaceProcPtr) ( short, CameraInterfaceDataPtr );
 
-/*** Specific camera interface procedures: add new interfaces here. ***/
-
-short DemoCameraInterface ( short, CameraInterfaceDataPtr );
-short CookbookCameraInterface ( short, CameraInterfaceDataPtr );
-short SBIGParallelCameraInterface ( short, CameraInterfaceDataPtr );
-short SBIGSerialCameraInterface ( short, CameraInterfaceDataPtr );
-short SBIGST4CameraInterface ( short, CameraInterfaceDataPtr );
+/*** Specific camera interface procedures: moved to SkySight.h ***/
 
 #endif /* CAMERA_INTERFACE_H */
 
