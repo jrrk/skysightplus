@@ -137,7 +137,7 @@ static short	DiscardCameraRows ( CameraInterfaceDataPtr );
     
 static HANDLE hCams[SXCCD_MAX_CAMS];
 static short	sRow = 0;
-static int nCams, colours, expose_flag, download_flag, cindex;
+static int colours, expose_flag, download_flag, cindex;
 static short *cameraImage;
 
 /*** SXUSBCameraInterface *************************************************
@@ -453,6 +453,29 @@ short GetCameraReadoutInfo ( CameraInterfaceDataPtr data )
 	return ( result );
 }
 
+/***  GGetNumPorts  **********************************************************/
+
+short GGetNumPorts ( void )
+{
+	return ( sxOpen(hCams) );
+}
+
+/***  GGetPortName  **********************************************************/
+
+void GGetPortName ( short wPortNum, char *lpszPortName )
+{
+    int model, fw;
+	struct t_sxccd_params *ccd_params = (struct t_sxccd_params *)malloc(sizeof(struct t_sxccd_params));
+	if ( wPortNum > 0 )
+			{
+            model = sxGetCameraModel(hCams[wPortNum-1]);
+            fw    = sxGetFirmwareVersion(hCams[wPortNum-1]);
+            sxGetCameraParams(hCams[wPortNum-1], 0, ccd_params);
+            wsprintf(lpszPortName, "SX-%c%d%c", model & 0x40 ? 'M' : 'H', model & 0x1F, model & 0x80 ? 'C' : ' ');
+			}
+	free(ccd_params);
+}
+
 /*** OpenCameraConnection ***************************************************
 
 	Opens a communications link with the camera.
@@ -488,8 +511,7 @@ short GetCameraReadoutInfo ( CameraInterfaceDataPtr data )
 
 short OpenCameraConnection ( CameraInterfaceDataPtr data )
 {
-    int model, fw;
-    
+    int model, fw;    
 	data->cameraTECState = TEC_OFF;
 	data->cameraTECPowerUse = 0.0;
 	data->cameraTemperatureSetpoint = 0.0;
@@ -504,17 +526,13 @@ short OpenCameraConnection ( CameraInterfaceDataPtr data )
 
 	colours = FILTER_CLEAR;
 
-    nCams = sxOpen(hCams);
-    if (nCams--)
-    {
+	if ( data->cameraPort >= 1 && data->cameraPort <= GGetNumPorts())
+			{
 			char linbuf[256];
 			struct t_sxccd_params *ccd_params = (struct t_sxccd_params *)malloc(sizeof(struct t_sxccd_params));
-			/*
-        	 * If no model passed in, just return the current settings.
-        	 */
-            model = sxGetCameraModel(hCams[nCams]);
-            fw    = sxGetFirmwareVersion(hCams[nCams]);
-            sxGetCameraParams(hCams[nCams], 0, ccd_params);
+            model = sxGetCameraModel(hCams[data->cameraPort-1]);
+            fw    = sxGetFirmwareVersion(hCams[data->cameraPort-1]);
+            sxGetCameraParams(hCams[data->cameraPort-1], 0, ccd_params);
             sprintf(linbuf, "Camera model SX-%c%d%c found ", model & 0x40 ? 'M' : 'H', model & 0x1F, model & 0x80 ? 'C' : ' ');
 			switch(model & ~0x80)
 				{
@@ -537,13 +555,13 @@ short OpenCameraConnection ( CameraInterfaceDataPtr data )
             if (ccd_params->extra_caps & SXCCD_CAPS_GUIDER)
             {
                 sprintf(linbuf, "\tAttached guider camera\n");
-                sxGetCameraParams(hCams[nCams], 1, ccd_params);
+                sxGetCameraParams(hCams[data->cameraPort-1], 1, ccd_params);
                 sprintf(linbuf, "\t\tGuider image array dimensions: (%d, %d)\n", ccd_params->width, ccd_params->height);
                 sprintf(linbuf, "\t\tGuider pixel dimensions: (%.1f, %.1f) microns\n", ccd_params->pix_width, ccd_params->pix_height);
             }
 			data->cameraPrivateData = ccd_params;
 			cameraImage = (short *)malloc(sx_ccd_width[cindex] * sx_ccd_height[cindex] * sizeof(short));
-			sxReset(hCams[nCams]);
+			sxReset(hCams[data->cameraPort-1]);
 			return TRUE;
     }
 	return ( FALSE );
@@ -578,7 +596,7 @@ short CloseCameraConnection ( CameraInterfaceDataPtr data )
 	int				result = TRUE;
 
 	free(data->cameraPrivateData);
-	sxClose(hCams[nCams]);
+	sxClose(hCams[data->cameraPort-1]);
 
     return ( result );
 }
@@ -780,9 +798,9 @@ short StartCameraExposure ( CameraInterfaceDataPtr data )
 		{
 		ULONG xVideoBin = data->cameraReadoutMode;
 		ULONG yVideoBin = data->cameraReadoutMode;
-		sxClearPixels(hCams[nCams], SXCCD_EXP_FLAGS_NOWIPE_FRAME, camIndex);
-		sxClearPixels(hCams[nCams], 0, camIndex);
-		sxClearPixels(hCams[nCams], 0, camIndex);
+		sxClearPixels(hCams[data->cameraPort-1], SXCCD_EXP_FLAGS_NOWIPE_FRAME, camIndex);
+		sxClearPixels(hCams[data->cameraPort-1], 0, camIndex);
+		sxClearPixels(hCams[data->cameraPort-1], 0, camIndex);
 		/* begin next exposure */
 		break;
 		}
@@ -793,9 +811,9 @@ short StartCameraExposure ( CameraInterfaceDataPtr data )
 		{
 		ULONG xVideoBin = 1; 
 		ULONG yVideoBin = 1;
-		sxClearPixels(hCams[nCams], SXCCD_EXP_FLAGS_NOWIPE_FRAME, camIndex);
-		sxClearPixels(hCams[nCams], 0, camIndex);
-		sxClearPixels(hCams[nCams], 0, camIndex);
+		sxClearPixels(hCams[data->cameraPort-1], SXCCD_EXP_FLAGS_NOWIPE_FRAME, camIndex);
+		sxClearPixels(hCams[data->cameraPort-1], 0, camIndex);
+		sxClearPixels(hCams[data->cameraPort-1], 0, camIndex);
 		/* begin next exposure */
 		expose_flag = 0;
 		download_flag = 1;
@@ -869,8 +887,8 @@ short StartCameraDownload ( CameraInterfaceDataPtr data )
 		{
 		ULONG xVideoBin = data->cameraReadoutMode;
 		ULONG yVideoBin = data->cameraReadoutMode;
-		sxLatchPixels(hCams[nCams], SXCCD_EXP_FLAGS_FIELD_BOTH, camIndex, xoffset, yoffset, sx_ccd_width[cindex]<<1, sx_ccd_height[cindex]>>1, xVideoBin, yVideoBin);
-		sxReadPixels(hCams[nCams], tmpImage, sx_ccd_height[cindex] * sx_ccd_width[cindex] / xVideoBin / yVideoBin);
+		sxLatchPixels(hCams[data->cameraPort-1], SXCCD_EXP_FLAGS_FIELD_BOTH, camIndex, xoffset, yoffset, sx_ccd_width[cindex]<<1, sx_ccd_height[cindex]>>1, xVideoBin, yVideoBin);
+		sxReadPixels(hCams[data->cameraPort-1], tmpImage, sx_ccd_height[cindex] * sx_ccd_width[cindex] / xVideoBin / yVideoBin);
 		Arrayswap(cameraImage, tmpImage, sx_ccd_height[cindex] / data->cameraReadoutMode, sx_ccd_width[cindex] / data->cameraReadoutMode,
 			cameraImage + sx_ccd_width[cindex] * sx_ccd_height[cindex], tmpImage + sx_ccd_height[cindex] * sx_ccd_width[cindex]);
 		break;
@@ -882,8 +900,8 @@ short StartCameraDownload ( CameraInterfaceDataPtr data )
 		{
 		ULONG xVideoBin = 1; 
 		ULONG yVideoBin = 1;
-		sxLatchPixels(hCams[nCams], SXCCD_EXP_FLAGS_FIELD_BOTH, camIndex, xoffset, yoffset, sx_ccd_width[cindex]<<1, sx_ccd_height[cindex]>>1, xVideoBin, yVideoBin);
-		sxReadPixels(hCams[nCams], tmpImage, sx_ccd_height[cindex] * sx_ccd_width[cindex]);
+		sxLatchPixels(hCams[data->cameraPort-1], SXCCD_EXP_FLAGS_FIELD_BOTH, camIndex, xoffset, yoffset, sx_ccd_width[cindex]<<1, sx_ccd_height[cindex]>>1, xVideoBin, yVideoBin);
+		sxReadPixels(hCams[data->cameraPort-1], tmpImage, sx_ccd_height[cindex] * sx_ccd_width[cindex]);
 		Arrayswap(cameraImage, tmpImage, sx_ccd_height[cindex]/ yVideoBin, sx_ccd_width[cindex] / xVideoBin,
 			cameraImage + sx_ccd_width[cindex] * sx_ccd_height[cindex], tmpImage + sx_ccd_height[cindex] * sx_ccd_width[cindex]);
 		download_flag = 0;

@@ -903,8 +903,6 @@ short			GetNumFilterTypes ( void );
 short			GetNthFilterType ( short, char * );
 
 short			DemoCameraInterface ( short, CameraInterfaceDataPtr );
-short			SBIGCameraInterface ( short, CameraInterfaceDataPtr );
-short			CookbookCameraInterface ( short, CameraInterfaceDataPtr );
 short			SXUSBCameraInterface ( short, CameraInterfaceDataPtr );
 
 /*** Functions in Camera.c ***/

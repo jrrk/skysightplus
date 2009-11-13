@@ -58,7 +58,7 @@ GWindowPtr CreateCameraControlDialog ( void )
 	else
 		sCameraControlDialog = dialog;
 	
-	GShowWindow ( dialog );
+//	GShowWindow ( dialog );
 	return ( dialog );
 }
 
