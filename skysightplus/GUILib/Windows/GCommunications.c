@@ -35,6 +35,7 @@ MODIFICATION HISTORY:
 #include "GUIPriv.h"
 #undef GLOBAL
 
+#if 0
 /***  GGetNumPorts  **********************************************************/
 
 short GGetNumPorts ( void )
@@ -52,6 +53,8 @@ void GGetPortName ( short wPortNum, char *lpszPortName )
 	if ( wPortNum > 9 && wPortNum < 14 )
     	wsprintf ( lpszPortName, "LPT%hd", wPortNum - 9 );
 }
+
+#endif
 
 #ifdef GWIN32
 #ifdef COM32S_H
